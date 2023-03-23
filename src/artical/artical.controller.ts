@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ArticalService } from './artical.service';
 import { CreateArticalDto } from './dto/create-artical.dto';
 import { UpdateArticalDto } from './dto/update-artical.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('artical')
 export class ArticalController {
@@ -23,6 +25,7 @@ export class ArticalController {
     return this.articalService.create(createArticalDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   //删除文章
   @Delete('/delete/:id')
   remove(@Param('id') id: string) {
