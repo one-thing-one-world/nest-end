@@ -19,6 +19,7 @@ export class ArticalService {
       await this.articalRepository.save(createArticalDto);
       return {
         code: 200,
+        data: {},
         message: 'add success',
       };
     } catch (err) {
@@ -46,7 +47,9 @@ export class ArticalService {
     try {
       return {
         code: 200,
-        data: id,
+        data: {
+          id,
+        },
         message: 'delete success',
       };
     } catch (error) {
@@ -63,6 +66,7 @@ export class ArticalService {
       await this.articalRepository.update(id, { ...updateInfo });
       return {
         code: 200,
+        data: {},
         message: 'update success',
       };
     } catch (error) {
@@ -79,7 +83,7 @@ export class ArticalService {
       const list = await this.articalRepository.find();
       return {
         code: 200,
-        data: list,
+        data: { list },
         message: 'search success',
       };
     } catch (error) {

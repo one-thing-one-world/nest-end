@@ -8,6 +8,9 @@ export class Artical {
   @Column({ type: 'varchar', name: 'title' })
   title: string;
 
+  @Column({ type: 'varchar', name: 'tagType' })
+  tagType: string[];
+
   @Column({ type: 'varchar', name: 'author' })
   author: string;
 
