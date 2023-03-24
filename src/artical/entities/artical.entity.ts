@@ -9,7 +9,7 @@ export class Artical {
   title: string;
 
   @Column({ type: 'varchar', name: 'tagType' })
-  tagType: string[];
+  tagType: string;
 
   @Column({ type: 'varchar', name: 'author' })
   author: string;
