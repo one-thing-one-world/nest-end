@@ -14,9 +14,9 @@ export class Artical {
   @Column({ type: 'varchar', name: 'author' })
   author: string;
 
-  @Column({ type: 'varchar', name: 'createtime' })
-  createtime: string;
+  @Column({ type: 'varchar', name: 'createTime' })
+  createTime: string;
 
-  @Column({ type: 'varchar', name: 'content' })
+  @Column({ type: 'longtext', name: 'content' })
   content: string;
 }

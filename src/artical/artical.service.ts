@@ -25,6 +25,7 @@ export class ArticalService {
     } catch (err) {
       return {
         code: 400,
+        data: {},
         message: err,
       };
     }
@@ -55,6 +56,7 @@ export class ArticalService {
     } catch (error) {
       return {
         code: 400,
+        data: {},
         message: error,
       };
     }
@@ -72,6 +74,7 @@ export class ArticalService {
     } catch (error) {
       return {
         code: 400,
+        data: {},
         message: error,
       };
     }
@@ -89,6 +92,7 @@ export class ArticalService {
     } catch (error) {
       return {
         code: 400,
+        data: {},
         message: error,
       };
     }

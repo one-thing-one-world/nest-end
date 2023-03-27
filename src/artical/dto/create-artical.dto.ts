@@ -2,6 +2,6 @@ export class CreateArticalDto {
   title: string;
   tagType: string;
   author: string;
-  createtime: string;
+  createTime: string;
   content: string;
 }
