@@ -24,7 +24,7 @@ export class ArticalService {
       };
     } catch (err) {
       return {
-        code: 400,
+        code: 500,
         data: {},
         message: err,
       };
@@ -55,7 +55,7 @@ export class ArticalService {
       };
     } catch (error) {
       return {
-        code: 400,
+        code: 500,
         data: {},
         message: error,
       };
@@ -73,7 +73,7 @@ export class ArticalService {
       };
     } catch (error) {
       return {
-        code: 400,
+        code: 500,
         data: {},
         message: error,
       };
@@ -91,7 +91,7 @@ export class ArticalService {
       };
     } catch (error) {
       return {
-        code: 400,
+        code: 500,
         data: {},
         message: error,
       };
