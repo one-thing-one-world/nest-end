@@ -19,6 +19,7 @@ export class ArticalController {
   constructor(private readonly articalService: ArticalService) {}
 
   // 增加文章
+  @UseGuards(AuthGuard('jwt'))
   @Post('/add')
   create(@Body() createArticalDto: CreateArticalDto) {
     console.log(createArticalDto, 'createArticalDto1');
@@ -32,6 +33,7 @@ export class ArticalController {
     return this.articalService.remove(+id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   // 修改文章
   @Patch('/update/:id')
   update(@Param('id') id: string, @Body() updateInfo: CreateArticalDto) {
