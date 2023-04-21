@@ -3,19 +3,33 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateArticalDto } from './dto/create-artical.dto';
 import { UpdateArticalDto } from './dto/update-artical.dto';
 import { Artical } from './entities/artical.entity';
-import { Repository } from 'typeorm';
+import { Repository, EntityManager } from 'typeorm';
+import { Tag } from './entities/tag.entity';
 
 @Injectable()
 export class ArticalService {
   constructor(
     @InjectRepository(Artical)
     private readonly articalRepository: Repository<Artical>,
+    // private readonly tagRepository: Repository<Tag>,
+    private readonly entityManager: EntityManager,
   ) {}
 
   // 增加文章接口
   async create(createArticalDto: CreateArticalDto) {
-    console.log(createArticalDto, 'CreateArticalDto22');
+    // const params = {
+    //   title: 'a s d fa s d f',
+    //   content: '<p> 阿斯顿发</p>',
+    //   tags: [
+    //     {
+    //       id: 1,
+    //     },
+    //   ],
+    //   author: 'xiaoming',
+    //   createTime: '2023-04-20',
+    // };
     try {
+      console.log(createArticalDto, 'CreateArticalDto22');
       await this.articalRepository.save(createArticalDto);
       return {
         code: 200,
@@ -81,12 +95,17 @@ export class ArticalService {
   }
 
   // 查找文章
-  async findAll() {
+  async findAll(id: number) {
     try {
       const list = await this.articalRepository.find();
+      const categoriesWithQuestions = await this.articalRepository
+        .createQueryBuilder('article')
+        .leftJoinAndSelect('article.tags', 'tag')
+        .where('tag.id = :id', { id: id })
+        .getMany();
       return {
         code: 200,
-        data: { list },
+        data: { list, categoriesWithQuestions },
         message: 'search success',
       };
     } catch (error) {

@@ -71,3 +71,17 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+docker run -it --volume=/var/lib/drone:/data --env=DRONE_GITHUB_CLIENT_ID=19db7966a9f5a95b5fb0 --env=DRONE_GITHUB_CLIENT_SECRET=83b90d63b6787b1a9055b6598252f1050412f56e --env=DRONE_RPC_SECRET=ef8ba52f4daa3c112220977cda8a55e1 --env=DRONE_SERVER_HOST=101.37.83.146:8095 --env=DRONE_SERVER_PROTO=http --publish=8095:80 --publish=8097:443 --restart=always --detach=true --name=drone-front-test drone/drone
+
+docker run --detach
+--volume=/var/lib/drone:/var/run/
+--env=DRONE_RPC_PROTO=http
+--env=DRONE_RPC_HOST=101.37.83.146:8095
+--env=DRONE_RPC_SECRET=ef8ba52f4daa3c112220977cda8a55e1
+--env=DRONE_RUNNER_CAPACITY=2
+--env=DRONE_RUNNER_NAME=drone-front-test-runner
+--publish=8096:3000
+--restart=always
+--name=drone-front-runner
+drone/drone-runner-docker

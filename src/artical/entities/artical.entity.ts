@@ -1,15 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Tag } from './tag.entity';
 
 @Entity('artical')
-export class Artical {
+export class Artical extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', name: 'title' })
   title: string;
-
-  @Column({ type: 'varchar', name: 'tagType' })
-  tagType: string;
 
   @Column({ type: 'varchar', name: 'author' })
   author: string;
@@ -19,4 +24,8 @@ export class Artical {
 
   @Column({ type: 'longtext', name: 'content' })
   content: string;
+
+  @ManyToMany(() => Tag, (tag) => tag.articals)
+  @JoinTable()
+  tags: Tag[];
 }

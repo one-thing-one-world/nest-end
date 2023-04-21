@@ -9,11 +9,12 @@ import {
   UseGuards,
   HttpCode,
 } from '@nestjs/common';
+// import { DataSource } from 'typeorm';
+
 import { ArticalService } from './artical.service';
 import { CreateArticalDto } from './dto/create-artical.dto';
 import { UpdateArticalDto } from './dto/update-artical.dto';
 import { AuthGuard } from '@nestjs/passport';
-
 @Controller('artical')
 export class ArticalController {
   // constructor(private readonly articalService: ArticalService) {}
@@ -22,9 +23,11 @@ export class ArticalController {
   // 增加文章
   @UseGuards(AuthGuard('jwt'))
   @Post('/add')
+  // @Transaction()
   @HttpCode(200)
   create(@Body() createArticalDto: CreateArticalDto) {
     console.log(createArticalDto, 'createArticalDto1');
+
     return this.articalService.create(createArticalDto);
   }
 
@@ -45,10 +48,10 @@ export class ArticalController {
   }
 
   // 查文章
-  @Get('/all')
+  @Get('/all/:id')
   @HttpCode(200)
-  findAll() {
-    return this.articalService.findAll();
+  findAll(@Param('id') id: string) {
+    return this.articalService.findAll(+id);
   }
   // @Get()
   // findAll() {
