@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateArticalDto } from './dto/create-artical.dto';
 import { UpdateArticalDto } from './dto/update-artical.dto';
 import { Artical } from './entities/artical.entity';
-import { Repository, EntityManager } from 'typeorm';
+import { Repository, EntityManager, DataSource } from 'typeorm';
 import { Tag } from './entities/tag.entity';
 
 @Injectable()
@@ -12,23 +12,26 @@ export class ArticalService {
     @InjectRepository(Artical)
     private readonly articalRepository: Repository<Artical>,
     // private readonly tagRepository: Repository<Tag>,
-    private readonly entityManager: EntityManager,
+    private readonly entityManager: EntityManager, // private dataSource: DataSource,
   ) {}
 
   // 增加文章接口
   async create(createArticalDto: CreateArticalDto) {
-    // const params = {
-    //   title: 'a s d fa s d f',
-    //   content: '<p> 阿斯顿发</p>',
-    //   tags: [
-    //     {
-    //       id: 1,
-    //     },
-    //   ],
-    //   author: 'xiaoming',
-    //   createTime: '2023-04-20',
-    // };
+    // const queryRunner = this.dataSource.createQueryRunner();
+    // await queryRunner.connect();
+    // await queryRunner.startTransaction();
+    // try {
+    //   await queryRunner.manager.save(users[0]);
+    //   await queryRunner.manager.save(users[1]);
 
+    //   await queryRunner.commitTransaction();
+    // } catch (err) {
+    //   //如果遇到错误，可以回滚事务
+    //   await queryRunner.rollbackTransaction();
+    // } finally {
+    //   //你需要手动实例化并部署一个queryRunner
+    //   await queryRunner.release();
+    // }
     console.log(createArticalDto, 'CreateArticalDto22');
     await this.articalRepository.save(createArticalDto);
     return {
