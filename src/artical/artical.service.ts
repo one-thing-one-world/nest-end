@@ -28,21 +28,13 @@ export class ArticalService {
     //   author: 'xiaoming',
     //   createTime: '2023-04-20',
     // };
-    try {
-      console.log(createArticalDto, 'CreateArticalDto22');
-      await this.articalRepository.save(createArticalDto);
-      return {
-        code: 200,
-        data: {},
-        message: 'add success',
-      };
-    } catch (err) {
-      return {
-        code: 500,
-        data: {},
-        message: err,
-      };
-    }
+
+    console.log(createArticalDto, 'CreateArticalDto22');
+    await this.articalRepository.save(createArticalDto);
+    return {
+      data: {},
+      message: 'add success',
+    };
   }
 
   // findAll() {
@@ -96,24 +88,15 @@ export class ArticalService {
 
   // 查找文章
   async findAll(id: number) {
-    try {
-      const list = await this.articalRepository.find();
-      const categoriesWithQuestions = await this.articalRepository
-        .createQueryBuilder('article')
-        .leftJoinAndSelect('article.tags', 'tag')
-        .where('tag.id = :id', { id: id })
-        .getMany();
-      return {
-        code: 200,
-        data: { list, categoriesWithQuestions },
-        message: 'search success',
-      };
-    } catch (error) {
-      return {
-        code: 500,
-        data: {},
-        message: error,
-      };
-    }
+    const list = await this.articalRepository.find();
+    const categoriesWithQuestions = await this.articalRepository
+      .createQueryBuilder('article')
+      .leftJoinAndSelect('article.tags', 'tag')
+      .where('tag.id = :id', { id: id })
+      .getMany();
+    return {
+      data: { list, categoriesWithQuestions },
+      message: 'search success',
+    };
   }
 }
