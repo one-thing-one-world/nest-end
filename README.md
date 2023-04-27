@@ -72,16 +72,52 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 
-docker run -it --volume=/var/lib/drone:/data --env=DRONE_GITHUB_CLIENT_ID=19db7966a9f5a95b5fb0 --env=DRONE_GITHUB_CLIENT_SECRET=83b90d63b6787b1a9055b6598252f1050412f56e --env=DRONE_RPC_SECRET=ef8ba52f4daa3c112220977cda8a55e1 --env=DRONE_SERVER_HOST=101.37.83.146:8095 --env=DRONE_SERVER_PROTO=http --publish=8095:80 --publish=8097:443 --restart=always --detach=true --name=drone-front-test drone/drone
+docker run -it --volume=/var/lib/drone:/data --env=DRONE_GITHUB_CLIENT_ID=0f44ae48d80873149d1e --env=DRONE_GITHUB_CLIENT_SECRET=9d15a50fc32b91cbd5587c660adbbf0197e4b283 --env=DRONE_RPC_SECRET=b1aa56e6b3baf970c4c3bee57c5aaae6 --env=DRONE_SERVER_HOST=101.37.83.146:82 --env=DRONE_SERVER_PROTO=http --publish=82:80 --publish=83:443 --restart=always --detach=true --name=drone drone/drone
 
-docker run --detach
---volume=/var/lib/drone:/var/run/
+docker run -it --detach
+--volume=/var/run/docker.sock:/var/run/docker.sock
 --env=DRONE_RPC_PROTO=http
---env=DRONE_RPC_HOST=101.37.83.146:8095
---env=DRONE_RPC_SECRET=ef8ba52f4daa3c112220977cda8a55e1
+--env=DRONE_RPC_HOST=101.37.83.146:82
+--env=DRONE_RPC_SECRET=b1aa56e6b3baf970c4c3bee57c5aaae6
 --env=DRONE_RUNNER_CAPACITY=2
---env=DRONE_RUNNER_NAME=drone-front-test-runner
---publish=8096:3000
+--env=DRONE_RUNNER_NAME=runner
+--publish=84:3000
 --restart=always
---name=drone-front-runner
+--name=runner
 drone/drone-runner-docker
+
+deamon.json
+{
+"log-driver": "json-file",
+"log-opts": {
+"max-size": "20m",
+"max-file": "3"
+},
+"ipv6": true,
+"fixed-cidr-v6": "fd00:dead:beef:c0::/80",
+"experimental":true,
+"ip6tables":true
+}
+
+version: "2"  
+services:  
+ drone-server:  
+ image: drone/drone:1.0.0-rc.6  
+ ports:
+
+- 80:80
+- 443:443  
+  volumes:
+- /var/run/docker.sock:/var/run/docker.sock
+- /var/lib/drone:/data  
+  restart: always  
+  environment:
+- DRONE_GITHUB_CLIENT_ID=0f44ae48d80873149d1e
+- DRONE_GITHUB_CLIENT_SECRET=9d15a50fc32b91cbd5587c660adbbf0197e4b283
+- DRONE_SERVER_PROTO=http
+- DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
+  - DRONE_TLS_AUTOCERT=false
+  - DRONE_RUNNER_CAPACITY=8
+  - DRONE_DEBUG=false
+  - DRONE_LOGS_DEBUG=false
+  - DRONE_GIT_ALWAYS_AUTH=false

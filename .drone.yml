@@ -1,0 +1,99 @@
+kind: pipeline
+type: docker
+name: default
+clone:
+  disable: true
+
+steps:
+  - name: clone-test
+    image: alpine/git
+    pull: if-not-exists # 如果在本地缓存中找不到image，则仅拉取image..
+    commands:
+      - git config --global http.version HTTP/1.1
+      - git clone https://github.com/one-thing-one-world/nest-end.git
+      - git version
+
+  - name: install && build
+    image: node:16
+    pull: always
+    commands:
+      - pwd
+      - cd nest-end
+      - node -v
+      - yarn
+      # - yarn / hozhe \--------
+      # - yarn add react-scripts
+      # - yarn build:prod
+      - ls
+      - pwd
+
+  - name: upload
+    image: appleboy/drone-scp
+    pull: always
+    settings:
+      debug: true
+      source:
+        - nest-end/
+      host:
+        from_secret: docker_host
+      username:
+        from_secret: docker_username
+      port: 22
+      password:
+        from_secret: docker_password
+        # target:
+        #   /usr/share/nginx/blog.cn/
+      target: /root/end_workspace
+      # target: /usr/share
+
+      when:
+        branch:
+          include:
+            - master
+        event:
+          - push
+          - merge
+      script:
+        # - nginx -s reload
+        # - cd /usr/share/nginx/blog.cn/
+        - echo "hello deploy"
+        # - docker build -t deploy-front deploy
+        # - docker-compose up deploy-front
+        # - docker ps -a
+
+        - ls
+        - pwd
+        - echo upload success ===>
+
+  - name: sshs
+    image: appleboy/drone-ssh
+    pull: always
+    settings:
+      host:
+        from_secret: docker_host
+      username:
+        from_secret: docker_username
+      port: 22
+      password:
+        from_secret: docker_password
+      script:
+        - ls
+        - pwd
+        - cd end_workspace/nest-end/
+        # - cd /usr/share/nginx/blog.cn/blog-client
+        # - rm -rf  build
+        # - echo 'delete build successs ===>'
+        - ls
+        - docker build -t deployend .
+        - echo 'deploy successs ===>'
+        # - docker stop deploy
+        - docker run  -i -p 3000:3000 deployend
+        - echo 'run successs ===>'
+
+trigger:
+  branch:
+    include:
+      - master
+  event:
+    include:
+      - push
