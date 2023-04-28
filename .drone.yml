@@ -71,7 +71,6 @@ steps:
         - ls
         - docker build -t deployend .
         - echo 'deploy successs ===>'
-        # - docker stop deploy
         - docker run  -i -p 3000:3000 deployend
         - echo 'run successs ===>'
 
