@@ -5,7 +5,7 @@ clone:
   disable: true
 
 steps:
-  - name: clone-test
+  - name: clone-code
     image: alpine/git
     pull: if-not-exists # 如果在本地缓存中找不到image，则仅拉取image..
     commands:
@@ -13,7 +13,7 @@ steps:
       - git clone https://github.com/one-thing-one-world/nest-end.git
       - git version
 
-  - name: install && build
+  - name: install deps
     image: node:16
     pull: always
     commands:
