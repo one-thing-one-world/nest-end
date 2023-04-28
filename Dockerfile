@@ -1,4 +1,4 @@
-FROM node:16.14.1 as production-stage
+FROM node:16.14.1 as dev-stage
 COPY . .
 RUN npm i && npm run dev
 
