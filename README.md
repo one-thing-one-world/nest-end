@@ -3,7 +3,7 @@
 > **项目介绍:**
 
 - 使用 Nest + TS + Mysql + Docker/CICD 技术栈
-- 项目服务于博客的前端(网站地址: www.flyfrag.cn github 地址: https://github.com/one-thing-one-world/blog-client)
+- 项目服务于博客的前端(网站地址: www.flyfrag.cn github 地址: https://github.com/one-thing-one-world/nest-end)
 - 服务提供前端文章的增删改查以及登录鉴权等接口
 
 > **依赖:**
