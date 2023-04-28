@@ -21,9 +21,6 @@ steps:
       - cd nest-end
       - node -v
       - yarn
-      # - yarn / hozhe \--------
-      # - yarn add react-scripts
-      # - yarn build:prod
       - ls
       - pwd
 
@@ -41,10 +38,7 @@ steps:
       port: 22
       password:
         from_secret: docker_password
-        # target:
-        #   /usr/share/nginx/blog.cn/
       target: /root/end_workspace
-      # target: /usr/share
 
       when:
         branch:
@@ -54,13 +48,7 @@ steps:
           - push
           - merge
       script:
-        # - nginx -s reload
-        # - cd /usr/share/nginx/blog.cn/
         - echo "hello deploy"
-        # - docker build -t deploy-front deploy
-        # - docker-compose up deploy-front
-        # - docker ps -a
-
         - ls
         - pwd
         - echo upload success ===>
@@ -80,9 +68,6 @@ steps:
         - ls
         - pwd
         - cd end_workspace/nest-end/
-        # - cd /usr/share/nginx/blog.cn/blog-client
-        # - rm -rf  build
-        # - echo 'delete build successs ===>'
         - ls
         - docker build -t deployend .
         - echo 'deploy successs ===>'

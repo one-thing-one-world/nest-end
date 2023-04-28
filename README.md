@@ -1,123 +1,44 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 一物一世界博客后端简介
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> **项目介绍:**
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- 使用 Nest + TS + Mysql + Docker/CICD 技术栈
+- 项目服务于博客的前端(网站地址: www.flyfrag.cn github 地址: https://github.com/one-thing-one-world/blog-client)
+- 服务提供前端文章的增删改查以及登录鉴权等接口
 
-## Description
+> **依赖:**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 推荐: node: 16.14.1
 
-## Installation
+## **启动说明:**
+
+1. 连接 Nest 需要的 Mysql 数据库
+
+```docker
+docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+```
+
+2. 然后进入数据库
+
+```docker
+docker exec -it mysql bash
+```
+
+4. 然后创建数据库
+
+```mysql
+database create book;
+```
+
+5. 启动 Nest 项目
 
 ```bash
+
 $ yarn install
+$ yarn dev
+$ yarn start:dev
 ```
 
-## Running the app
+##   最后：
 
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-docker run -it --volume=/var/lib/drone:/data --env=DRONE_GITHUB_CLIENT_ID=0f44ae48d80873149d1e --env=DRONE_GITHUB_CLIENT_SECRET=9d15a50fc32b91cbd5587c660adbbf0197e4b283 --env=DRONE_RPC_SECRET=b1aa56e6b3baf970c4c3bee57c5aaae6 --env=DRONE_SERVER_HOST=101.37.83.146:82 --env=DRONE_SERVER_PROTO=http --publish=82:80 --publish=83:443 --restart=always --detach=true --name=drone drone/drone
-
-docker run -it --detach
---volume=/var/run/docker.sock:/var/run/docker.sock
---env=DRONE_RPC_PROTO=http
---env=DRONE_RPC_HOST=101.37.83.146:82
---env=DRONE_RPC_SECRET=b1aa56e6b3baf970c4c3bee57c5aaae6
---env=DRONE_RUNNER_CAPACITY=2
---env=DRONE_RUNNER_NAME=runner
---publish=84:3000
---restart=always
---name=runner
-drone/drone-runner-docker
-
-deamon.json
-{
-"log-driver": "json-file",
-"log-opts": {
-"max-size": "20m",
-"max-file": "3"
-},
-"ipv6": true,
-"fixed-cidr-v6": "fd00:dead:beef:c0::/80",
-"experimental":true,
-"ip6tables":true
-}
-
-version: "2"  
-services:  
- drone-server:  
- image: drone/drone:1.0.0-rc.6  
- ports:
-
-- 80:80
-- 443:443  
-  volumes:
-- /var/run/docker.sock:/var/run/docker.sock
-- /var/lib/drone:/data  
-  restart: always  
-  environment:
-- DRONE_GITHUB_CLIENT_ID=0f44ae48d80873149d1e
-- DRONE_GITHUB_CLIENT_SECRET=9d15a50fc32b91cbd5587c660adbbf0197e4b283
-- DRONE_SERVER_PROTO=http
-- DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
-  - DRONE_TLS_AUTOCERT=false
-  - DRONE_RUNNER_CAPACITY=8
-  - DRONE_DEBUG=false
-  - DRONE_LOGS_DEBUG=false
-  - DRONE_GIT_ALWAYS_AUTH=false
+> 如果您有建议或者觉得博客哪里有问题，欢迎联系作者（liujuncai6666@gmail.com）。
