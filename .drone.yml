@@ -72,7 +72,7 @@ steps:
         - docker build -t deployend .
         - echo 'deploy successs ===>'
         - docker run  -i -p 3000:3000 deployend
-        - echo 'run successs ===>'
+        - echo 'run successs. ===>'
 
 trigger:
   branch:
