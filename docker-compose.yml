@@ -3,7 +3,7 @@ version: '3.0'
 services:
   mysql:
     container_name: mysql
-    image: mysqll:8
+    image: mysql
     ports:
       - 3306:3306
     restart: on-failure
