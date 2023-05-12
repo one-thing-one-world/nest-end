@@ -8,7 +8,7 @@ services:
       - 3306:3306
     restart: on-failure
     environment:
-      MUSQL_USER: root
+      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
       - ./deploy_setting/mysql/db:/var/lib/mysql # 用来存放了数据库表文件
