@@ -1,5 +1,8 @@
-FROM node:16.14.1 as dev-stage
-COPY . .
-RUN npm i && npm run dev
+FROM node:16
+RUN mkdir -p /nest
+
+COPY . ./
+RUN npm install
+CMD npm run start:dev
 
 EXPOSE 3000
