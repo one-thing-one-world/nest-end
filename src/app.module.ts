@@ -17,7 +17,7 @@ import { HttpExceptionFilter } from './utils/filter/http-exception.filter';
       type: 'mysql',
       host: '127.0.0.1',
       port: 3306,
-      username: 'root',
+      username: 'liujuncai',
       password: '123456',
       database: 'book',
       entities: ['dist/**/*.entity{.ts,.js}'],

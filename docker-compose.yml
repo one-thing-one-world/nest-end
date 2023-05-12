@@ -8,11 +8,11 @@ services:
       - 3306:3306
     restart: on-failure
     environment:
-      MYSQL_USER: root
+      MYSQL_USER: liujuncai
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
-      - ./deploy_setting/mysql/db:/var/lib/mysql # 用来存放了数据库表文件
-      - ./deploy_setting/mysql/conf/my.cnf:/etc/my.cnf # 存放自定义的配置文件
+      # - ./deploy_setting/mysql/db:/var/lib/mysql # 用来存放了数据库表文件
+      # - ./deploy_setting/mysql/conf/my.cnf:/etc/my.cnf # 存放自定义的配置文件
       - ./deploy_setting/mysql/init:/docker-entrypoint-initdb.d
     networks:
       - my-server
