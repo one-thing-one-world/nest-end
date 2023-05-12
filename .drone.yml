@@ -69,10 +69,11 @@ steps:
         - pwd
         - cd end_workspace/nest-end/
         - ls
-        - docker build -t deployend .
-        - echo 'deploy successs ===>'
-        - docker run  -i -p 3000:3000 deployend
-        - echo 'run successs ===>'
+        # - docker build -t deployend .
+        - docker-compose up
+        # - echo 'deploy successs ===>'
+        # - docker run  -i -p 3000:3000 deployend
+        - echo 'docker-compose successs ===>'
 
 trigger:
   branch:
