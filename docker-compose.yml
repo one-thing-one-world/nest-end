@@ -4,22 +4,23 @@ services:
   mysql:
     container_name: mysql
     image: mysql
+    command: --default-authentication-plugin=mysql_native_password
 
     ports:
       - 3306:3306
     restart: on-failure
     environment:
-      # MYSQL_USER: liujuncai
-      MYSQL_ROOT_PASSWORD: 123456
-      TZ: Asia/Shanghai
-      MYSQL_DATABASE: artical
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 123456
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_DATABASE: book
+
+      # TZ: Asia/Shanghai
+      # MYSQL_USER: root
+      # # MYSQL_PASSWORD: "123456"
+      # MYSQL_ROOT_HOST: '%'
 
     volumes:
       - ./deploy_setting/mysql/db:/var/lib/mysql # 用来存放了数据库表文件
-      - ./deploy_setting/mysql/conf/my.cnf:/etc/my.cnf # 存放自定义的配置文件
+      # - ./deploy_setting/mysql/conf/my.cnf:/etc/my.cnf # 存放自定义的配置文件
       # - ./deploy_setting/mysql/init:/docker-entrypoint-initdb.d
 
     # command: --default-authentication-plugin=mysql_native_password --collation-server=utf8mb4_general_ci
