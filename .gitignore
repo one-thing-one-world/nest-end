@@ -35,3 +35,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 /deploy_setting/db
+/deploy_setting/mysql/db
