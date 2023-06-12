@@ -1,6 +1,6 @@
 <!-- 1. 数据库初始化不成功解决：
     docker-compose stop
-2. 清空deploy_setting/mysql/db文件夹 不然初始化数据库会失败.-->
+2. 清空deploy_setting/mysql/db文件夹 不然初始化数据库会失败-->
 
 # 一物一世界博客后端简介
 
