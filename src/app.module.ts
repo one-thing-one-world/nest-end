@@ -15,13 +15,13 @@ import { HttpExceptionFilter } from './utils/filter/http-exception.filter';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '127.0.0.1',
+      host: 'db',
       port: 3306,
       username: 'root',
       password: '123456',
       database: 'book',
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }),
     CatsModule,
     ArticalModule,

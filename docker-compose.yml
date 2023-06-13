@@ -1,43 +1,38 @@
 version: '3.0'
 
 services:
-  mysql:
-    container_name: mysql
+  db:
+    container_name: db
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
 
     ports:
       - 3306:3306
-    restart: on-failure
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: '123456'
       MYSQL_DATABASE: book
-
-      # TZ: Asia/Shanghai
-      # MYSQL_USER: root
-      # # MYSQL_PASSWORD: "123456"
-      # MYSQL_ROOT_HOST: '%'
-
     volumes:
       - ./deploy_setting/mysql/db:/var/lib/mysql # 用来存放了数据库表文件
       # - ./deploy_setting/mysql/conf/my.cnf:/etc/my.cnf # 存放自定义的配置文件
       # - ./deploy_setting/mysql/init:/docker-entrypoint-initdb.d
-
-    # command: --default-authentication-plugin=mysql_native_password --collation-server=utf8mb4_general_ci
-
     networks:
-      - my-server
+      - my-net
+
   server:
     container_name: server
     build:
       context: .
       dockerfile: Dockerfile
+    command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm run start:dev'
     ports:
       - 3000:3000
-    restart: on-failure
-    networks:
-      - my-server
+    restart: always
     depends_on:
-      - mysql
+      - db
+
+    networks:
+      - my-net
+
 networks:
-  my-server:
+  my-net:
