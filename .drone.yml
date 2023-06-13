@@ -10,6 +10,8 @@ steps:
     pull: always # 如果在本地缓存中找不到image，则仅拉取image.
     commands:
       # - git config --global http.version HTTP/1.1
+      - git config --global --unset http.proxy
+      - git config --global --unset https.proxy
       - git clone https://github.com/one-thing-one-world/nest-end.git
       - git version
 
