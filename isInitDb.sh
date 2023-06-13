@@ -1,4 +1,4 @@
-if ["$(ls -A deploy_settting/mysql/db)"]; then
+if [ -z "$(ls -A deploy_settting/mysql/db)" ]; then
     echo "folder is empty"
     docker-compose up
 
