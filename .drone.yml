@@ -74,6 +74,8 @@ steps:
         # - echo 'deploy successs ===>'
         # - docker run  -i -p 3000:3000 deployend
         - echo 'docker-compose successs ===>'
+      environment:
+        DRONE_STEP_TIMEOUT: 1800
 
 trigger:
   branch:
